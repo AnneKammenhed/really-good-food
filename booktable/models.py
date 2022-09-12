@@ -1,13 +1,78 @@
-from django.db import models
-from django.utils import timezone
-from django.urls import reverse
 from datetime import date
+from django.db import models
+from django.contrib.auth.models import User
 
 
-# class for guest
-class Guest(models.Model):
-    guest_name = models.CharField(max_length=25,
-        verbose_name='Guest Name', blank=True,)
+# Model to book a table = available times+number of guests+guest details
+class Booking(models.Model):
+    # values for what days Good Food is open, three seatings:
+    TUESDAY = 'Tue'
+    WEDNESDAY = 'Wed'
+    THURSDAY = 'Thu'
+    FRIDAY = 'Fri'
+    SATURDAY = 'Sat'
+    OPENING_DAYS_CHOICES = [
+        (TUESDAY, 'Tuesday'),
+        (WEDNESDAY, 'Wednesday'),
+        (THURSDAY, 'Thursday'),
+        (FRIDAY, 'Friday'),
+        (SATURDAY, 'Saturday'),   
+    ]
+
+    DINNER1 = '17.00-18.30'
+    DINNER2 = '18.30-20.00'
+    DINNER3 = '20.00-21.30'
+    SEATING_TIMES_CHOICES = [
+        (DINNER1, '17.00-18.30'),
+        (DINNER2, '18.30-20.00'),
+        (DINNER3, '20.00-21.30'),
+    ]
+
+    # online booking allows for a maximum of eight guests
+    ONE = 'One guest'
+    TWO = 'Two guests'
+    THREE = 'Three guests'
+    FOUR = 'Four guests'
+    FIVE = 'Five guests'
+    SIX = 'Six guests'
+    SEVEN = 'Seven guests'
+    EIGHT = 'Eight guests'
+    NUMBER_OF_GUESTS = [
+        (ONE, 'One guest'),
+        (TWO, 'Two guests'),
+        (THREE, 'Three guests'),
+        (FOUR, 'Four guests'),
+        (FIVE, 'Five guests'),
+        (SIX, 'Six guests'),
+        (SEVEN, 'Seven guests'),
+        (EIGHT, 'Eight guests'),
+    ]
+
+    booking_day = models.CharField(
+        max_length=10,
+        choices=OPENING_DAYS_CHOICES,
+        default=TUESDAY,
+    )
+    
+    booking_time = models.CharField(
+        max_length=20,
+        choices=SEATING_TIMES_CHOICES,
+        default=DINNER1,
+    )
+
+    number_of_guests = models.CharField(
+        max_length=20,
+        choices=NUMBER_OF_GUESTS, 
+        default=TWO,
+    )
+
+    allergies = models.TextField(
+        max_length=100, 
+        verbose_name='Allergies',
+        blank=True,
+    )
+
+    guest_name = models.ForeignKey(User, on_delete=models.CASCADE, related_name="booking")
 
     guest_email = models.EmailField(verbose_name='Email',
         blank=False)
@@ -15,37 +80,12 @@ class Guest(models.Model):
     guest_phone = models.CharField(max_length=25,
         verbose_name='Phone', blank=True)
 
-    def __str__(self):
-        return self.guest_name
-
-
-
-# model for 1 guest to book an available table:
-class Booking(models.Model):
-    guest_who_books = models.ForeignKey(Guest, on_delete=models.CASCADE, null = True)
-    guests_per_booking = models.PositiveSmallIntegerfield(default=2, max_value=8) 
-
-    created_date = models.DateTimeField(default=timezone.now())
-    booking_day = models.DateField(null=True)
-    booking_time = models.TimeField(Null=True)
-    booking_number = models.CharField(max_length=50,unique=True)
+    # def current_week(request):
+    #    return date.today().isocalendar()[1] 
 
     class Meta:
         ordering = ('booking_day', 'booking_time')
-        unique_together = ('guest_who_books', 'booking_day', 'booking_time')
-    
+        unique_together = ('guest_name', 'booking_day', 'booking_time')
+
     def __str__(self):
-        return self.booking_number
-
-    def save(self, **kwargs):
-        if not self.booking_number:
-            self.booking_number = f'{self.booking_day:%Y%m%d}{self.booking_time:%H%M}'
-        super().save(**kwargs)
-    
-    def get_booking_url(self):
-        return reverse('booktable:detail', kwargs={'pk':self.pk})
-
-    @property
-    def places_left(self):
-        
-        return 3
+        return f'{self.guest_name} for {self.number_of_guests} on {self.booking_day} at {self.booking_time}'

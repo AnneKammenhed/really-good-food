@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Booking Column -->
+<div class="col-12 mt-3 left">
+    <div class="row">
+        <div class="card-body">
+            <div class="cover-text">
+                <h2>Book a table at our place!</h2>
+                <br/>
+                    {% if submitted %}
+                        Thank you for Your reservation! Have a look at <a href="{% url 'menu' %}">Our menu!</a>
+                    {% else %}
+                <form id="booking_form" action="" method=POST>
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <input type="submit" value="Book a table" class="btn btn-success default" name="_save">
+
+                </form>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
