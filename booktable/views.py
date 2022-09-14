@@ -6,7 +6,7 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm
 
-from .models import Booking
+from .models import Booking, Menu
 from .forms import BookingForm
 
 # from django.urls import reverse
@@ -48,4 +48,5 @@ def home(request):
 
 
 def menu(request):
-    return render(request, 'menu.html')
+    menu = Menu.objects.all()
+    return render(request, 'menu.html', {'menu': menu})

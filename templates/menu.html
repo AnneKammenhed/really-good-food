@@ -11,7 +11,11 @@
                 <div class="card-body">
                     <div class="cover-text">
                         <h1>Menu</h1>
-                       
+                        <ol>
+                            {% for menu in menu %}
+                                <li class="delete-items">{{ menu }}</li>
+                            {% endfor %}
+                        </ol>
                     </div>
                 </div>
             </div>
