@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 
@@ -11,7 +11,6 @@ from .forms import BookingForm
 
 # from django.urls import reverse
 # from django.views.generic.edit import FormView
-
 
 # function to add valid bookings to the database
 def add_booking(request):
@@ -27,6 +26,12 @@ def add_booking(request):
             submitted = True
 
     return render(request, 'bookings.html', {'form': booking_form, 'submitted': submitted})
+
+# function to show and delete own booking
+def get_booking(request):
+    booking_list = Booking.objects.all()
+
+    return render(request, "bookings.html", {'booking_list': booking_list})
 
 def home(request):
     return render(request, 'index.html')

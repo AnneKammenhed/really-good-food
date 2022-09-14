@@ -88,7 +88,9 @@ class Booking(models.Model):
         blank=True,
     )
 
-    guest = models.ForeignKey(User, on_delete=models.CASCADE, related_name="booking") 
+    guest = models.ForeignKey(User, on_delete=models.CASCADE, related_name="booking")
+
+    objects = models.Manager()
 
     class Meta:
         ordering = ('booking_week', 'booking_day', 'booking_time')
