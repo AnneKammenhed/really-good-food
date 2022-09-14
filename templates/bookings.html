@@ -7,18 +7,14 @@
         <div class="card-body">
             <div class="cover-text">
                 <h2>Book a table at our place!</h2>
-
-                {% for booking in booking_list %}
-                    {{ booking }}
-                {% endfor %}
-
+                
                 {% if user.is_authenticated %}
                 <br/>
                     {% if submitted %}
                         <p>Thank you for Your reservation ! Have a look at <a href="{% url 'menu' %}">Our menu!</a></p>
                         <br/>
                         <br/>                        
-                        <p>Would you like to <a href="{% url 'delete_booking' %}">delete</a> your booking? </p>
+                        <p>Would you like to <a href="{% url 'get_booking' %}">delete</a> your booking? </p>
                         
                     {% else %}
                 <form id="booking_form" action="" method=POST>

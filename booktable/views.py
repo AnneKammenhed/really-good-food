@@ -12,6 +12,7 @@ from .forms import BookingForm
 # from django.urls import reverse
 # from django.views.generic.edit import FormView
 
+
 # function to add valid bookings to the database
 def add_booking(request):
     submitted = False
@@ -27,18 +28,20 @@ def add_booking(request):
 
     return render(request, 'bookings.html', {'form': booking_form, 'submitted': submitted})
 
+
 # functions to show and delete own booking
 def get_booking(request):
     booking_list = Booking.objects.filter(guest=request.user)
 
-    return render(request, 'bookings.html', {'booking_list': booking_list})
+    return render(request, 'delete_booking.html', {'booking_list': booking_list})
+
 
 def delete_booking(request, booking_id):
     booking = Booking.objects.get(pk=booking_id)
     if request.user.is_user:
         booking.delete()
+        return redirect('booking_list')
 
-    return render(request, 'booking_list')
 
 def home(request):
     return render(request, 'index.html')
@@ -46,4 +49,3 @@ def home(request):
 
 def menu(request):
     return render(request, 'menu.html')
-
