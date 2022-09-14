@@ -81,6 +81,11 @@ body {
     margin-top: 5px;
 }
 
+/* the list items for deletion */
+.delete-items {
+    margin-top: 2px;
+}
+
 .image-container {
     position: relative;
 }

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 
@@ -27,14 +27,23 @@ def add_booking(request):
 
     return render(request, 'bookings.html', {'form': booking_form, 'submitted': submitted})
 
-# function to show and delete own booking
+# functions to show and delete own booking
 def get_booking(request):
-    booking_list = Booking.objects.all()
+    booking_list = Booking.objects.filter(guest=request.user)
 
-    return render(request, "bookings.html", {'booking_list': booking_list})
+    return render(request, 'bookings.html', {'booking_list': booking_list})
+
+def delete_booking(request, booking_id):
+    booking = Booking.objects.get(pk=booking_id)
+    if request.user.is_user:
+        booking.delete()
+
+    return render(request, 'booking_list')
 
 def home(request):
     return render(request, 'index.html')
 
+
 def menu(request):
     return render(request, 'menu.html')
+

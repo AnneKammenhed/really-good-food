@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Booking Column -->
+<div class="col-12 mt-3 left">
+    <div class="row">
+        <div class="card-body">
+            <div class="cover-text">
+                <h2>Delete a reservation:</h2>
+                {% if user.is_authenticated %}
+                <br/>
+
+                <ul>
+                    {% for booking in booking_list %}
+                        <a href="{% url 'delete_booking' booking.id %}" class="btn btn-warning btn-sm">Delete Booking</a>
+                    {% endfor %}
+                </ul>
+                                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

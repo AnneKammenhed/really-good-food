@@ -18,8 +18,8 @@
                         <p>Thank you for Your reservation ! Have a look at <a href="{% url 'menu' %}">Our menu!</a></p>
                         <br/>
                         <br/>                        
-                        <p>Would you like to delete your booking?
-                        <input type="submit" value="Delete booking" class="btn btn-warning default" name="_delete"></p>
+                        <p>Would you like to <a href="{% url 'delete_booking' %}">delete</a> your booking? </p>
+                        
                     {% else %}
                 <form id="booking_form" action="" method=POST>
                     {% csrf_token %}
