@@ -37,13 +37,15 @@ def get_booking(request):
 def edit_booking(request, booking_id):
     booking = Booking.objects.get(pk=booking_id)
     form = BookingForm(request.POST or None, instance=booking)
+    if form.is_valid():
+        form.save()
+        return redirect('booking_list')
     return render(request, 'edit_booking.html', {'booking': booking, 'form': form})
 
 def delete_booking(request, booking_id):
     booking = Booking.objects.get(pk=booking_id)
-    if request.user.is_user:
-        booking.delete()
-        return redirect('booking_list')
+    booking.delete()
+    return redirect('booking_list')
 
 
 def home(request):
