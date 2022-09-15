@@ -9,9 +9,6 @@
         <div class="col-12 mt-3 left">
             <div class="row">
                 <h1>Menu</h1>
-                {% for Starters in menu.course_type %}
-                {% endfor %}
-                
                 {% for menu in menu %}
                 <div class="col-md-4">
                     <div class="card mb-4">
@@ -19,7 +16,11 @@
                             <div>
                                 {{ menu.course_type }}
                                 <div class="image-container">
-                                {{ menu.course_image }}
+                                    {% if 'placeholder' in menu.course_image.url %}
+                                        <img class="card-img-top" src="../media/heroimg_goodfood.jpg" alt="image of good food">
+                                    {% else %}
+                                        <img class="card-img-top" src="{{ booking.course_image.url }}" alt="image of good food">
+                                    {% endif %}
                                 </div>
                                 {{ menu.course_name }}
                                 <br>
