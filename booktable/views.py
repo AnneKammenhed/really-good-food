@@ -29,12 +29,14 @@ def add_booking(request):
     return render(request, 'bookings.html', {'form': booking_form, 'submitted': submitted})
 
 
-# functions to show and delete own booking
+# functions to show, edit and delete own booking
 def get_booking(request):
     booking_list = Booking.objects.filter(guest=request.user)
+    return render(request, 'booking_list.html', {'booking_list': booking_list})
 
-    return render(request, 'delete_booking.html', {'booking_list': booking_list})
-
+def edit_booking(request, booking_id):
+    edit_booking = Booking.objects.get(pk=booking_id)
+    return render(request, 'edit_booking.html', {'edit_booking': edit_booking})
 
 def delete_booking(request, booking_id):
     booking = Booking.objects.get(pk=booking_id)

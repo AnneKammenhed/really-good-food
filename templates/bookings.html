@@ -14,7 +14,7 @@
                         <p>Thank you for Your reservation ! Have a look at <a href="{% url 'menu' %}">Our menu!</a></p>
                         <br/>
                         <br/>                        
-                        <p>Would you like to <a href="{% url 'get_booking' %}">delete</a> your booking? </p>
+                        <p>Would you like to <a href="{% url 'booking_list' %}">edit</a> or <a href="{% url 'booking_list' %}">delete</a> your booking? </p>
                         
                     {% else %}
                 <form id="booking_form" action="" method=POST>
