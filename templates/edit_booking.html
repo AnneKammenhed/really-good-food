@@ -9,8 +9,17 @@
                 <div class="card-body">
                     <div class="cover-text">
                         <h2>Edit your booking</h2>
+                        {% if user.is_authenticated %}
                         <br/>
-                        {{ edit_booking }}
+                        <form id="booking_form" action="" method=POST>
+                            
+                            {% csrf_token %}
+                            {{ form.as_p }}
+        
+                            <input type="submit" value="Save edit" class="btn btn-info default" name="_edit">
+        
+                        </form>
+                        {% endif %}
                     </div>
                 </div>    
             </div>        

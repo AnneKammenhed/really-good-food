@@ -35,8 +35,9 @@ def get_booking(request):
     return render(request, 'booking_list.html', {'booking_list': booking_list})
 
 def edit_booking(request, booking_id):
-    edit_booking = Booking.objects.get(pk=booking_id)
-    return render(request, 'edit_booking.html', {'edit_booking': edit_booking})
+    booking = Booking.objects.get(pk=booking_id)
+    form = BookingForm(request.POST or None, instance=booking)
+    return render(request, 'edit_booking.html', {'booking': booking, 'form': form})
 
 def delete_booking(request, booking_id):
     booking = Booking.objects.get(pk=booking_id)
