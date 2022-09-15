@@ -8,35 +8,22 @@
         <!-- Menu Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
+                <h1>Menu</h1>
+                {% for Starters in menu.course_type %}
+                {% endfor %}
+                
                 {% for menu in menu %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div class="image-container">
-                                {% if "placeholder" in menu.featured_image.url %}
-                                    <img class="card-img-top" src=" {{ menu.featured_image.url }}">
-                                {% else %}           
-                                    <img class="card-img-top" src="../media/heroimg goodfood.jpg">
-                                {% endif %}
-                            </div>
                             <div>
-                                <h1>Menu</h1>
                                 {{ menu.course_type }}
-                                {{ menu.menu_item }}
-                                 <!-- Menu Column {% if menu.course_type is Starters %}
-                                    <h2 class="card-title">Starters</h2>
-                                    <p class="card-text">{{ menu.menu_item }}</p>
-                                {% endif %}
+                                <div class="image-container">
+                                {{ menu.course_image }}
+                                </div>
+                                {{ menu.course_name }}
                                 <br>
-                                {% if menu.course_type is Mains %}
-                                    <h2 class="card-title">Mains</h2>
-                                    <p class="card-text">{{ menu.menu_item }}</p>
-                                {% endif %}
-                                <br>
-                                {% if menu.course_type is Deserts %}
-                                    <h2 class="card-title">Deserts</h2>
-                                    <p class="card-text">{{ menu.menu_item }}</p>
-                                {% endif %}-->
+                                {{ menu.course_description }}
                             </div>
                         </div>
                     </div>

@@ -111,15 +111,20 @@ class Menu(models.Model):
         (DESERTS, 'Deserts'),
     ]
     
-    menu_item = models.CharField(max_length=100, unique=True)
-    
     course_type = models.CharField(
         max_length=12,
         choices=COURSES,
         default=MAINS,
     )
-    
-    featured_image = CloudinaryField('image', default='placeholder')
+
+    course_image = CloudinaryField('image', default='placeholder')
+
+    course_name = models.CharField(max_length=25, unique=True, default="")
+
+    course_description = models.CharField(max_length=100, unique=False, default="")
+
+    class Meta:
+        ordering = ('course_type', 'course_image', 'course_name', 'course_description')
 
     def __str__(self):
-        return f'{self.menu_item}'
+        return f'{self.course_name}'
