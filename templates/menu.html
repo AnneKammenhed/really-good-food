@@ -8,30 +8,25 @@
         <!-- Menu Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                <h1>Menu</h1>
+                <h1>Our Menu</h1>
                 {% for menu in menu %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div>
-                                {{ menu.course_type }}
+                                {{ menu.course_name }}
                                 <div class="image-container">
                                     {% if 'placeholder' in menu.course_image.url %}
-                                        <img class="card-img-top" src="https://asset.cloudinary.com/dvntlbjov/9cf7b1c13b4e330cf7c0de2dab8c4e9e" alt="image of good food">
+                                        <img class="card-img-top" src="https://res.cloudinary.com/dvntlbjov/image/upload/v1663245254/heroimg_goodfood_ffmbxq.jpg" alt="image of good food">
                                     {% else %}
-                                        <img class="card-img-top" src="{{ booking.course_image.url }}" alt="image of good food">
+                                        <img class="card-img-top" src="{{ menu.course_image.url }}" alt="image of good food">
                                     {% endif %}
                                 </div>
-                                {{ menu.course_name }}
-                                <br>
-                                {{ menu.course_description }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                {% endfor %}       
+                {% endfor %}
             </div>
         </div>
     </div>
