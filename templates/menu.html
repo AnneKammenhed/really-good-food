@@ -13,8 +13,7 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div>
-                                {{ menu.course_name }}
+                                <h3>{{ menu.course_name }}</h3>
                                 <div class="image-container">
                                     {% if 'placeholder' in menu.course_image.url %}
                                         <img class="card-img-top" src="https://res.cloudinary.com/dvntlbjov/image/upload/v1663245254/heroimg_goodfood_ffmbxq.jpg" alt="image of good food">
@@ -22,7 +21,6 @@
                                         <img class="card-img-top" src="{{ menu.course_image.url }}" alt="image of good food">
                                     {% endif %}
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
