@@ -33,7 +33,9 @@ During the project I've tried to book, edit and delete bookings with different u
 
 Also I've frequently used 'python3 manage.py makemigrations --dry-run' during development, to try out migrations before the real migration.
 
-In the latest errors with the style-sheet 'git stash -u' has been awesome to return to the latest pushed version.
+In the tests with the style-sheets, 'git stash -u' has been awesome to return to the latest pushed version.
+
+I built a test for the Booking model (python3 manage.py test) and tried that the booking days did not return Sunday, when the restaurant is closed. 
 
 <h2>Credits</h2>
 

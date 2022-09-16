@@ -67,7 +67,7 @@ class Booking(models.Model):
         choices=OPENING_DAYS_CHOICES,
         default=TUESDAY,
     )
-    
+ 
     booking_time = models.CharField(
         max_length=20,
         choices=SEATING_TIMES_CHOICES,
