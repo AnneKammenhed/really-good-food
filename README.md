@@ -23,7 +23,7 @@ This app was created using three different repositories. In troubleshooting the 
 
 The second repository (https://github.com/AnneKammenhed/good-food-too) was not connected to Heroku and there I succeeded in getting a basic model working to book times. 
 
-To be sure not to run in to the same problem as in the first repository, I also created a third repository (this one) where I tried to develop the functioning model with the django TimeDateField. I also connected the User function since this is the solution that I found for the guest to be able to erase their bookings (requirement for the project). When trying to style the final site before handing in the project, the css-file and django settings stopped working. Unfortulatelly I couldn't style the final product furter.
+To be sure not to run in to the same problem as in the first repository, I also created a third repository (this one) where I tried to develop the functioning model with the django TimeDateField. I also connected the User function since this is the solution that I found for the guest to be able to erase their bookings (requirement for the project). When trying to add an hero image from the Cloudinary storage, the connection to style.css and the django settings were lost. Unfortulatelly I couldn't add a hero image or style the final website furter.
 
 <h2>Deployment</h2>
 The app is deployed in Heroku and the images are in Cloudinary.
